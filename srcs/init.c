@@ -6,44 +6,29 @@
 /*   By: tnolent <tnolent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:22:13 by tnolent           #+#    #+#             */
-/*   Updated: 2024/12/19 12:30:46 by tnolent          ###   ########.fr       */
+/*   Updated: 2024/12/21 14:44:54 by tnolent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	set_mlx(t_size_img *point)
+void	set_mlx(t_fractal *mlx)
 {
-	point->size_x = LARGEUR;
-	point->size_y = HAUTEUR;
-	point->border = 100;
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, LARGEUR, HAUTEUR, "PUTAIN DE FRACTOL DE MERDE");
+	mlx->img = mlx_new_image(mlx->mlx, LARGEUR, HAUTEUR);
+	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
+			&mlx->line_length, &mlx->endian);
 }
 
-void	set_fractalv2(t_fractal *fractal)
-{	
-	fractal->z_i = 0;
-	fractal->z_r = 0;
-	fractal->zoom = 400;
-	fractal->iter_max = 50;
-	fractal->image_x = (fractal->x2 - fractal->x1) * fractal->zoom;
-	fractal->image_y = (fractal->y2 - fractal->y1) * fractal->zoom;
-	fractal->x1 = -2.1;
-	fractal->x2 = 0.6;
-	fractal->y1 = -1.2;
-	fractal->y2 = 1.2;
-}
-
-void	set_fractal(t_fractal *fractal)
-{	
-	fractal->z_i = 0;
-	fractal->z_r = 0;
-	fractal->iter_max = 100;
-	fractal->image_x = LARGEUR;
-	fractal->image_y = HAUTEUR;
-	fractal->x1 = -2.1;
-	fractal->x2 = 0.6;
-	fractal->y1 = -1.2;
-	fractal->y2 = 1.2;
-	fractal->zoom_x = fractal->image_x / (fractal->x2 - fractal->x1);
-	fractal->zoom_y = fractal->image_y / (fractal->y2 - fractal->y1);
+void	set_fractalv2(t_fractal *fractal, int type)
+{
+	if (type == 1)
+	{
+		fractal->iter_max = 100;
+		fractal->min_x = -2.1;
+		fractal->max_x = 0.6;
+		fractal->min_y = -1.2;
+		fractal->max_y = 1.2;
+	}
 }

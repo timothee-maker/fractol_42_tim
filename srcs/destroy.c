@@ -6,7 +6,7 @@
 /*   By: tnolent <tnolent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 19:08:32 by tnolent           #+#    #+#             */
-/*   Updated: 2024/12/17 19:22:08 by tnolent          ###   ########.fr       */
+/*   Updated: 2024/12/20 10:54:39 by tnolent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <math.h>
 #include <stdio.h>
 
-void	destroy_win(t_data *data)
+void	destroy_win(t_fractal *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_window(data->mlx, data->win);

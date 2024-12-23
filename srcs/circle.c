@@ -6,7 +6,7 @@
 /*   By: tnolent <tnolent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:47:21 by tnolent           #+#    #+#             */
-/*   Updated: 2024/12/17 18:56:17 by tnolent          ###   ########.fr       */
+/*   Updated: 2024/12/20 10:54:50 by tnolent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	in_circle(t_size_img *point, int x, int y)
 	}
 }
 
-void	circle(t_size_img *point, t_data img)
+void	circle(t_size_img *point, t_fractal img)
 {
 	int	x;
 	int	y;

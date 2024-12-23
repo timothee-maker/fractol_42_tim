@@ -6,26 +6,41 @@
 /*   By: tnolent <tnolent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:26:47 by tnolent           #+#    #+#             */
-/*   Updated: 2024/12/19 12:40:28 by tnolent          ###   ########.fr       */
+/*   Updated: 2024/12/21 14:24:58by tnolent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	zoom(int event, int x, int y, t_data *img)
-{
-	if (event == 4)
-	{
-		img->fractal.zoom += 10;
-	}
-	else if (event == 5)
-	{
-		printf("%d", img->fractal.zoom);
-		img->fractal.zoom = img->fractal.zoom - 10;
+// void	zoom(t_fractal *fractal, double m_r, double m_i, double zoom)
+// {
+// 	fractal->max_x *= 1.1;
+// 	fractal->min_x *= 1.1;
+// 	fractal->max_y *= 1.1;
+// 	fractal->min_y *= 1.1;
+// }
 
-	}
-	mlx_clear_window(img->mlx, img->win);
-	fractal(&img->fractal, *img);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	return (0);
+// void	de_zoom(t_fractal *fractal, double m_r, double m_i, double zoom)
+// {
+// 	fractal->min_x /= 1.1;
+// 	fractal->max_x /= 1.1;
+// 	fractal->min_y /= 1.1;
+// 	fractal->max_y /= 1.1;
+// }
+
+double	interpolate(double start, double end, double interpolation)
+{
+	return (start + ((end - start) * interpolation));
+}
+
+void	applyZoom(t_fractal *e, double mouseRe, double mouseIm,
+		double zoomFactor)
+{
+	double interpolation;
+
+	interpolation = 1.0 / zoomFactor;
+	e->min_x = interpolate(mouseRe, e->min_x, interpolation);
+	e->min_y = interpolate(mouseIm, e->min_y, interpolation);
+	e->max_x = interpolate(mouseRe, e->max_x, interpolation);
+	e->max_y = interpolate(mouseIm, e->max_y, interpolation);
 }
